@@ -1,25 +1,27 @@
-package Assignments;
+ package Assignments;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.devtools.v104.browser.Browser;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.opentelemetry.exporter.logging.SystemOutLogExporter;
+import AutomateWebsite.Headers;
 
 public class Assignment_1 {
-
-	public static void main(String[] args) throws InterruptedException {
+	static WebDriver driver;
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		//1.Open the chrome browser.
-		ChromeOptions Options = new ChromeOptions();
-		Options.addArguments("--remote-allow-origins=*");
-		WebDriverManager.chromedriver().setup();
-		WebDriver  driver = new ChromeDriver(Options); 
+//		ChromeOptions Options = new ChromeOptions();
+//		Options.addArguments("--remote-allow-origins=*");
+//		WebDriverManager.chromedriver().setup();
+//		WebDriver driver = new ChromeDriver(Options); 
+		
+		 
+		driver = new Headers().launchbrowser("Firefox","https://www.demoblaze.com/index.html");
 		
 		//2. Maximize the browser window
 		driver.manage().window().maximize();
@@ -54,14 +56,28 @@ public class Assignment_1 {
 		Thread.sleep(4000);
 		//9.Reload the page.
 		driver.navigate().refresh();
-		TakesScreenshot scrShot =((TakesScreenshot)WebDriver);
-		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(outputType.FILE);
+		
+//	    3. Take window Screenshot
+	    takewindowscreenshot("Assignment1");
+		
+		//TakesScreenshot scrShot =((TakesScreenshot)webdriver);
+		//File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		
 		//10.Close the Browser.
 		Thread.sleep(5000);
 		driver.quit();
 		System.out.println("Assignment_1 Pass");
+		
 
+	}
+		public static void takewindowscreenshot(String name) throws IOException {
+			File screenshotFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			// String path = System.getProperty("user.dir")+"\\NewSCreenshot\\"+name+".png";
+			String path = System.getProperty("user.dir")+"\\Assignmen1SC\\"+name+".png";
+			FileUtils.copyFile(screenshotFile, new File(path));
+			System.out.println("done screenshot");
+
+		
 	}
 
 }

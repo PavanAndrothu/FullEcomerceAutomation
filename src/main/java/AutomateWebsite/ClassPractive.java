@@ -111,7 +111,9 @@ public class ClassPractive {
 
 	public static void takewindowscreenshot(String name) throws IOException {
 		File screenshotFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String path = System.getProperty("user.dir")+"\\NewSCreenshot\\"+name+".png";
+		// String path = System.getProperty("user.dir")+"\\NewSCreenshot\\"+name+".png";
+		String path = System.getProperty("user.dir")+"\\Scc\\"+name+".png";
 		FileUtils.copyFile(screenshotFile, new File(path));
+		System.out.println("done screenshot");
 	}
 }
